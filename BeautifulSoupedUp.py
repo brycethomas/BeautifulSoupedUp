@@ -57,14 +57,29 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 """
 __author__ = "Bryce Thomas (bthomas@codeemporium.com)"
-__version__ = "0.7"
+__version__ = "0.8"
 __copyright__ = "Copyright (c) 2009 Bryce Thomas"
 __license__ = "New-style BSD"
 
-from BeautifulSoup import BeautifulSoup, Tag,NavigableString,PageElement, ResultSet, isList, isString, DEFAULT_OUTPUT_ENCODING
+from BeautifulSoup import BeautifulSoup, Tag,NavigableString,PageElement, ResultSet, DEFAULT_OUTPUT_ENCODING
 from Tkinter import *
 import tkFont
 import traceback
+
+# isList and isString copied from BeautifulSoup's util.py
+def isList(l):
+    """Convenience method that works with all 2.x versions of Python
+    to determine whether or not something is listlike."""
+    return ((hasattr(l, '__iter__') and not isString(l))
+            or (type(l) in (types.ListType, types.TupleType)))
+
+def isString(s):
+    """Convenience method that works with all 2.x versions of Python
+    to determine whether or not something is stringlike."""
+    try:
+        return isinstance(s, unicode) or isinstance(s, basestring)
+    except NameError:
+        return isinstance(s, str)
 
 class BeautifulSoupedUp():
 
